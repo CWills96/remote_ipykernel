@@ -1,12 +1,13 @@
-Remote IKernel
+Remote IPyKernel
 --------------
 
 All your Jupyter kernels, on all your machines, in one place.
+This is a fork of abandoned package `remote_ikernel` by Tom Daff <tdd20@cam.ac.uk>.
 
 Launch Jupyter kernels on remote systems and through batch queues so that
 they can be used within a local Jupyter noteboook.
 
-.. image :: https://raw.githubusercontent.com/tdaff/remote_ikernel/master/doc/kernels.png
+![kernel image](doc/kernels.png "Kernel Dropdown")
 
 Jupyter compatible Kernels start through interactive jobs in batch queue
 systems (SGE, SLURM, PBS...) or through SSH connections. Once the kernel is
@@ -14,21 +15,21 @@ started, SSH tunnels are created for the communication ports are so the
 notebook can talk to the kernel as if it was local.
 
 Commands for managing the kernels are included. It is also possible to use
-``remote_ikernel`` to manage kernels from different virtual environments or
+`remote_ipykernel` to manage kernels from different virtual environments or
 different python implementations.
 
-Install with ``pip install remote_ikernel``. Requires ``notebook`` (as part
-of Jupyter), version 4.0 or greater and ``pexpect``. Passwordless ``ssh``
+Install with `pip install remote_ipykernel`. Requires `notebook` (as part
+of Jupyter), version 4.0 or greater and `pexpect`. Passwordless `ssh`
 to the all the remote machines is also recommended (e.g. nodes on a cluster).
 
-.. warning::
+**Warning**
 
-   ``remote_ikernel`` opens multiple connections across several machines
+   ``remote_ipykernel`` opens multiple connections across several machines
    to tunnel communication ports. If you have concerns about security or
    excessive use of resources, please consult your systems administrator
    before using this software.
 
-.. note::
+**Note**
 
    When running kernels on remote machines, the notebooks themselves will
    be saved onto the local filesystem, but the kernel will only have access
@@ -36,57 +37,56 @@ to the all the remote machines is also recommended (e.g. nodes on a cluster).
    directories, set up ``sshfs`` between your machines.
 
 
-.. code:: shell
-
+```bash
    # Install the module ('python setup.py install' also works)
 
-   pip install remote_ikernel
+   pip install remote_ipykernel
+```
 
-.. code:: shell
-
+```bash
    # Set up the kernels you'd like to use
 
-   remote_ikernel manage
+   remote_ipykernel manage
+```
 
-.. code:: shell
-
+```bash
    # Add a new kernel running through GrideEngine
 
-   remote_ikernel manage --add \
+   remote_ipykernel manage --add \
       --kernel_cmd="ipython kernel -f {connection_file}" \
       --name="Python 2.7" --cpus=2 --pe=smp --interface=sge
+```
 
-.. code:: shell
-
+```bash
    # Add an SSH connection to a remote machine running IJulia
 
-   remote_ikernel manage --add \
+   remote_ipykernel manage --add \
       --kernel_cmd="/home/me/julia-903644385b/bin/julia -i --startup-file=yes --color=yes /home/me/.julia/v0.6/IJulia/src/kernel.jl {connection_file}" \
       --name="IJulia 0.6.0" --interface=ssh \
       --host=me@remote.machine --workdir='/home/me/Workdir' --language=julia
+```
 
-.. code:: shell
-
+```bash
    # Set up kernels for your local virtual environments that can be run
    # from a single notebook server.
 
-   remote_ikernel manage --add \
+   remote_ipykernel manage --add \
       --kernel_cmd="/home/me/Virtualenvs/dev/bin/ipython kernel -f {connection_file}" \
       --name="Python 2 (venv:dev)" --interface=local
+```
 
-.. code:: shell
-
+```bash
    # Connect to a SLURM cluster through a gateway machine (to get into a
    # local network) and cluster frontend machine (where the sqsub runs from).
 
-   remote_ikernel manage --add \
+   remote_ipykernel manage --add \
       --kernel_cmd="ipython kernel -f {connection_file}" \
       --name="Python 2.7" --cpus=4 --interface=slurm \
       --tunnel-hosts gateway.machine cluster.frontend
-
+```
 
 The kernel spec files will be installed so that the new kernel appears in
-the drop-down list in the notebook. ``remote_ikernel manage`` also has options
+the drop-down list in the notebook. ``remote_ipykernel manage`` also has options
 to show and delete existing kernels.
 
 
@@ -111,6 +111,10 @@ to be added for each hop. Note, for the security conscious, that idle kernels
 on multiplexed connections allow new ssh connections to be started without a
 password.
 
+Changes for v1.0
+================
+
+  * Setup updates and code usability tweaks
 
 Changes for v0.4
 ================
