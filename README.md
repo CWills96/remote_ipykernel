@@ -1,5 +1,4 @@
-Remote IPyKernel
---------------
+# Remote IPyKernel
 
 All your Jupyter kernels, on all your machines, in one place.
 This is a fork of abandoned package `remote_ikernel` by Tom Daff <tdd20@cam.ac.uk>.
@@ -90,20 +89,20 @@ the drop-down list in the notebook. ``remote_ipykernel manage`` also has options
 to show and delete existing kernels.
 
 
-Connection multiplexing
-=======================
+## Connection multiplexing
+
 
 When working with remote machines, each kernel creates two ``ssh``
 connections. If you would like to reduce that, you can set up automatic
 multiplexing of connections. For each machine, add a configuration to your
 ``~/.ssh/config``:
 
-.. code::
-
+```shell
    Host myhost.ac.uk
        ControlMaster auto
        ControlPath ~/.ssh/%r@%h:%p
        ControlPersist 1
+```
 
 This will create a master connection that remains in the background when and
 multiplex everything through that. If you have multiple hops, this will need

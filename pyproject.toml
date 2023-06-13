@@ -1,9 +1,10 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm[toml]"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "remote_ipykernel"
+version = "1.0.1"
 description = "Running IPython kernels remotely and through batch queues"
 authors = [
     { name = "Tom Daff", email = "tdd20@cam.ac.uk" },
@@ -18,18 +19,13 @@ classifiers = [
     'License :: OSI Approved :: BSD License',
 ]
 dependencies = [
-    'notebook',
-    'pexpect',
-    'tornado'
+    'notebook>=6',
+    'pexpect>=4',
+    'tornado>=4'
 ]
-dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://github.com/CWills96/remote_ipykernel"
 
 [project.scripts]
-ikr = "remote_ipykernel.manage:manage"
-
-[tool.setuptools_scm]
-write_to = "remote_ipykernel/__version.py"
-git_describe_command = "git describe --dirty --tags --long --match v* --first-parent"
+rkr = "remote_ipykernel.manage:manage"
