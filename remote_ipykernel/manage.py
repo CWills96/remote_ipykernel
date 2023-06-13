@@ -167,7 +167,7 @@ def add_kernel(
     """
     kernel_name = []
     display_name = []
-    argv = [sys.executable, "-m", "remote_ikernel"]
+    argv = [sys.executable, "-m", "remote_ipykernel"]
 
     # How to connect to kernel
     if interface == "local":
