@@ -45,13 +45,16 @@ to the all the remote machines is also recommended (e.g. nodes on a cluster).
 ```bash
    # Set up the kernels you'd like to use
 
-   remote_ipykernel manage
+   remote_ipykernel
+
+   # Or
+   rkr
 ```
 
 ```bash
    # Add a new kernel running through GrideEngine
 
-   remote_ipykernel manage --add \
+   remote_ipykernel --add \
       --kernel_cmd="ipython kernel -f {connection_file}" \
       --name="Python 2.7" --cpus=2 --pe=smp --interface=sge
 ```
@@ -59,7 +62,7 @@ to the all the remote machines is also recommended (e.g. nodes on a cluster).
 ```bash
    # Add an SSH connection to a remote machine running IJulia
 
-   remote_ipykernel manage --add \
+   remote_ipykernel --add \
       --kernel_cmd="/home/me/julia-903644385b/bin/julia -i --startup-file=yes --color=yes /home/me/.julia/v0.6/IJulia/src/kernel.jl {connection_file}" \
       --name="IJulia 0.6.0" --interface=ssh \
       --host=me@remote.machine --workdir='/home/me/Workdir' --language=julia
@@ -69,7 +72,7 @@ to the all the remote machines is also recommended (e.g. nodes on a cluster).
    # Set up kernels for your local virtual environments that can be run
    # from a single notebook server.
 
-   remote_ipykernel manage --add \
+   remote_ipykernel --add \
       --kernel_cmd="/home/me/Virtualenvs/dev/bin/ipython kernel -f {connection_file}" \
       --name="Python 2 (venv:dev)" --interface=local
 ```
@@ -78,14 +81,14 @@ to the all the remote machines is also recommended (e.g. nodes on a cluster).
    # Connect to a SLURM cluster through a gateway machine (to get into a
    # local network) and cluster frontend machine (where the sqsub runs from).
 
-   remote_ipykernel manage --add \
+   remote_ipykernel --add \
       --kernel_cmd="ipython kernel -f {connection_file}" \
       --name="Python 2.7" --cpus=4 --interface=slurm \
       --tunnel-hosts gateway.machine cluster.frontend
 ```
 
 The kernel spec files will be installed so that the new kernel appears in
-the drop-down list in the notebook. ``remote_ipykernel manage`` also has options
+the drop-down list in the notebook. ``remote_ipykernel`` also has options
 to show and delete existing kernels.
 
 

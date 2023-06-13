@@ -20,11 +20,11 @@ from os import path
 from subprocess import list2cmdline
 
 # How we identify kernels that rik will manage
-from remote_ikernel import RIK_PREFIX, __version__
+from remote_ipykernel import RIK_PREFIX, __version__
 
 # These go through a compatibility layer to work with IPython and Jupyter
-from remote_ikernel.compat import kernelspec as ks
-from remote_ikernel.compat import tempdir
+from remote_ipykernel.compat import kernelspec as ks
+from remote_ipykernel.compat import tempdir
 
 # When Python 2 pipes into something else, there is no encoding
 # set. Assume that it is utf-8 so that scripttest works as expected.
@@ -427,8 +427,6 @@ def manage():
         raw_args = [x.decode("UTF-8") for x in sys.argv[1:]]
     except AttributeError:
         pass
-    # Remove 'manage' to parse manage specific options
-    raw_args.remove("manage")
     args = parser.parse_args(raw_args)
 
     if args.add:

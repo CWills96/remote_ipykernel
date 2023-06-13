@@ -31,7 +31,7 @@ except ImportError:
 
 from tornado.log import LogFormatter
 
-from remote_ikernel import RIK_PREFIX, __version__
+from remote_ipykernel import RIK_PREFIX, __version__
 
 
 # All the ports that need to be forwarded
